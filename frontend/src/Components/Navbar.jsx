@@ -1,28 +1,21 @@
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { CgSearch } from "react-icons/cg";
 import { ImUser } from "react-icons/im";
 import { MdLanguage } from "react-icons/md";
-import { useState } from "react";
 
 const Navbar = () => {
 
-    const [register, setRegister] = useState('');
     const navigate = useNavigate();
 
-    const handleClick = () => {
-        navigate('/register');
-    }
-
-    const handleChange = (e) => {
-        console.log('value: ',e.target.value);
-        setRegister(e.target.value);
+    const handleHome = () => {
+        navigate('/');
     }
 
     return (
         <div>
             <Desktop>
-                <Logo src="https://download.logo.wine/logo/Dell_Technologies/Dell_Technologies-Logo.wine.png" alt="logo" />
+                <Logo onClick={handleHome} src="https://download.logo.wine/logo/Dell_Technologies/Dell_Technologies-Logo.wine.png" alt="logo" />
                 <SearchBox>
                     <Input type="text" placeholder="search here" />
                     <CgSearch style={{
@@ -34,10 +27,7 @@ const Navbar = () => {
                     <ImUser style={{
                         fontSize: '20px',
                     }} />
-                    <Select value={register} onChange={handleChange} onClick={handleClick}>
-                        <option value="register">Sign In</option>
-                        <option value="logout">Logout</option>
-                    </Select>
+                    <Link to='/register'>Sign In</Link>
                 </User>
                 <Language>
                     <MdLanguage style={{
@@ -56,10 +46,7 @@ const Navbar = () => {
                         <ImUser style={{
                             fontSize: '20px',
                         }} />
-                        <Select value={register} onChange={handleChange}>
-                            <option value="register">Sign In</option>
-                            <option value="logout">Logout</option>
-                        </Select>
+                        <Link to='/register'>Sign In</Link>
                     </User>
                     <Language>
                         <MdLanguage style={{
@@ -107,6 +94,7 @@ const Logo = styled.img`
   display: flex;
   justify-content: start;
   align-items: center;
+  cursor: pointer;
 `
 
 const SearchBox = styled.div`

@@ -54,14 +54,14 @@ const Login = () => {
 
                 <AuthRoute>
                     <Button
-                        left="20px"
+                        leftborder="20px"
                         onClick={handleRegister}
                     >
                         Register
                     </Button>
                     <Button
                         color="white"
-                        right="20px"
+                        rightborder="20px"
                         onClick={handleLogin}
                     >
                         Log In
@@ -145,8 +145,8 @@ const Button = styled.button`
   font-weight: 600;
   border: none;
   background: ${(props) => props.color};
-  border-top-left-radius: ${(props) => props.left};
-  border-top-right-radius: ${(props) => props.right};
+  border-top-left-radius: ${(props) => props.leftborder};
+  border-top-right-radius: ${(props) => props.rightborder};
 `
 
 const Box = styled.div`
