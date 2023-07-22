@@ -3,70 +3,97 @@ import styled from "styled-components";
 import { CgSearch } from "react-icons/cg";
 import { ImUser } from "react-icons/im";
 import { MdLanguage } from "react-icons/md";
+import { useSelector } from "react-redux";
+import { username } from "./username";
+import { useState } from "react";
 
 const Navbar = () => {
 
-    const navigate = useNavigate();
+  const navigate = useNavigate();
+  const [logout, setLogout] = useState(false);
+  let { auth } = useSelector((store) => store.AuthReducer);
 
-    const handleHome = () => {
-        navigate('/');
-    }
+  const handleLogout = () => {
+    setLogout(!logout);
+  }
 
-    return (
-        <div>
-            <Desktop>
-                <Logo onClick={handleHome} src="https://download.logo.wine/logo/Dell_Technologies/Dell_Technologies-Logo.wine.png" alt="logo" />
-                <SearchBox>
-                    <Input type="text" placeholder="search here" />
-                    <CgSearch style={{
-                        fontSize: '20px',
-                        padding: '0px 10px'
-                    }} />
-                </SearchBox>
-                <User>
-                    <ImUser style={{
-                        fontSize: '20px',
-                    }} />
-                    <Link to='/register'>Sign In</Link>
-                </User>
-                <Language>
-                    <MdLanguage style={{
-                        fontSize: '20px'
-                    }} />
-                    <Select>
-                        <option value="">Language</option>
-                    </Select>
-                </Language>
-            </Desktop>
+  const handleUserLogout = () => {
+    alert(`${auth[0].name} is successfully logout`);
+    window.location.reload();
+  }
 
-            <Mobile>
-                <MenuBar>
-                    <Logo src="https://download.logo.wine/logo/Dell_Technologies/Dell_Technologies-Logo.wine.png" alt="logo" />
-                    <User>
-                        <ImUser style={{
-                            fontSize: '20px',
-                        }} />
-                        <Link to='/register'>Sign In</Link>
-                    </User>
-                    <Language>
-                        <MdLanguage style={{
-                            fontSize: '20px'
-                        }} />
-                        <Select>
-                            <option value="">Language</option>
-                        </Select>
-                    </Language>
-                </MenuBar>
-                <SearchBox>
-                    <Input type="text" placeholder="search here" />
-                    <CgSearch style={{
-                        fontSize: '20px',
-                        padding: '0px 10px'
-                    }} />
-                </SearchBox>
-            </Mobile>
-        </div>
-    )
+  const handleHome = () => {
+    navigate('/');
+  }
+
+  return (
+    <div>
+      <Desktop>
+        <Logo onClick={handleHome} src="https://download.logo.wine/logo/Dell_Technologies/Dell_Technologies-Logo.wine.png" alt="logo" />
+        <SearchBox>
+          <Input type="text" placeholder="search here" />
+          <CgSearch style={{
+            fontSize: '20px',
+            padding: '0px 10px'
+          }} />
+        </SearchBox>
+        {auth === null ?
+          <User>
+            <ImUser style={{
+              fontSize: '20px',
+            }} />
+            <Link to='/register'>Sign In</Link>
+          </User> :
+          <UserBox onClick={handleLogout}>
+            <UserImage src={auth[0].imgUrl} />
+            <UserName>{username(auth[0].name)}</UserName>
+            { logout && <Logout onClick={handleUserLogout}>Logout</Logout> }
+          </UserBox>
+        }
+        <Language>
+          <MdLanguage style={{
+            fontSize: '20px'
+          }} />
+          <Select>
+            <option value="">Language</option>
+          </Select>
+        </Language>
+      </Desktop>
+
+      <Mobile>
+        <MenuBar>
+          <Logo src="https://download.logo.wine/logo/Dell_Technologies/Dell_Technologies-Logo.wine.png" alt="logo" />
+          {auth === null ?
+            <User>
+              <ImUser style={{
+                fontSize: '20px',
+              }} />
+              <Link to='/register'>Sign In</Link>
+            </User> :
+            <UserBox>
+              <UserImage src={auth[0].imgUrl} />
+              <UserName>{username(auth[0].name)}</UserName>
+            </UserBox>
+          }
+          <Language>
+            <MdLanguage style={{
+              fontSize: '20px'
+            }} />
+            <Select>
+              <option value="">Language</option>
+            </Select>
+          </Language>
+        </MenuBar>
+        <SearchBox>
+          <Input type="text" placeholder="search here" />
+          <CgSearch style={{
+            fontSize: '20px',
+            padding: '0px 10px'
+          }} />
+        </SearchBox>
+      </Mobile>
+    </div>
+  )
 }
 
 export default Navbar;
@@ -125,13 +152,14 @@ const Input = styled.input`
 
 const User = styled.div`
   border: 1px solid;
-  width: 120px;
+  width: 90px;
   height: 2rem;
   margin: auto;
   display: flex;
   justify-content: center;
   align-items: center;
   grid-column: 4/5;
+  gap: 5%;
   border-radius: 2px;
 
   @media (max-width: 850px) {
@@ -149,6 +177,30 @@ const Select = styled.select`
   outline: none;
   display: flex;
   font-size: 16px;
+`
+
+const UserBox = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+`
+
+const UserImage = styled.img`
+  display: block;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+`
+
+const UserName = styled.p`
+  font-size: 20px;
+`
+
+const Logout = styled.p`
+  position: absolute;
+  top: 50%;
 `
 
 const Language = styled.div`
