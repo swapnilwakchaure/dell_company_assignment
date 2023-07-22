@@ -3,13 +3,20 @@ import styled from "styled-components";
 import { CgSearch } from "react-icons/cg";
 import { ImUser } from "react-icons/im";
 import { MdLanguage } from "react-icons/md";
+import { useState } from "react";
 
 const Navbar = () => {
 
+    const [register, setRegister] = useState('');
     const navigate = useNavigate();
 
-    const handleRegister = () => {
+    const handleClick = () => {
         navigate('/register');
+    }
+
+    const handleChange = (e) => {
+        console.log('value: ',e.target.value);
+        setRegister(e.target.value);
     }
 
     return (
@@ -27,9 +34,9 @@ const Navbar = () => {
                     <ImUser style={{
                         fontSize: '20px',
                     }} />
-                    <Select>
-                        <option value="">Sign In</option>
-                        <option value="">Logout</option>
+                    <Select value={register} onChange={handleChange} onClick={handleClick}>
+                        <option value="register">Sign In</option>
+                        <option value="logout">Logout</option>
                     </Select>
                 </User>
                 <Language>
@@ -49,9 +56,9 @@ const Navbar = () => {
                         <ImUser style={{
                             fontSize: '20px',
                         }} />
-                        <Select>
-                            <option value="" onClick={handleRegister}>Sign In</option>
-                            <option value="">Logout</option>
+                        <Select value={register} onChange={handleChange}>
+                            <option value="register">Sign In</option>
+                            <option value="logout">Logout</option>
                         </Select>
                     </User>
                     <Language>
