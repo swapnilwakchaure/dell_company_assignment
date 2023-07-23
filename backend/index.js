@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 const fileUpload = require('express-fileupload');
 
 const { authRoute } = require('./routes/authRoute');
+const { productRoute } = require('./routes/productRoute');
 const { connection } = require('./connection/db');
 
 
@@ -22,6 +23,7 @@ app.get('/', (request, response) => {
 });
 
 app.use('/auth', authRoute);
+app.use('/product', productRoute);
 
 
 
