@@ -14,7 +14,12 @@ productRoute.get('/', async (request, response) => {
     const query = request.query.q || '';
 
     try {
-        const data = await ProductModel.find({ name: query }).skip(skip).limit(limit);
+        let data;
+        if (query) {
+            data = await ProductModel.find({ name: query }).skip(skip).limit(limit);
+        } else {
+            data = await ProductModel.find().skip(skip).limit(limit);
+        }
         response.send(data);
     } catch (error) {
         // console.log('error: ',error);

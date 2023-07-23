@@ -3,15 +3,25 @@ import styled from "styled-components";
 import { CgSearch } from "react-icons/cg";
 import { ImUser } from "react-icons/im";
 import { MdLanguage } from "react-icons/md";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { username } from "./username";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { getData } from "../Redux/Product/action";
 
 const Navbar = () => {
 
   const navigate = useNavigate();
   const [logout, setLogout] = useState(false);
-  let { auth } = useSelector((store) => store.AuthReducer);
+  const [query, setQuery] = useState('');
+  const page = 1;
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getData(page, query));
+  }, []);
+
+  let { isAuth, auth } = useSelector((store) => store.AuthReducer);
 
   const handleLogout = () => {
     setLogout(!logout);
@@ -31,13 +41,18 @@ const Navbar = () => {
       <Desktop>
         <Logo onClick={handleHome} src="https://download.logo.wine/logo/Dell_Technologies/Dell_Technologies-Logo.wine.png" alt="logo" />
         <SearchBox>
-          <Input type="text" placeholder="search here" />
+          <Input
+            type="text"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            placeholder="search here"
+          />
           <CgSearch style={{
             fontSize: '20px',
             padding: '0px 10px'
           }} />
         </SearchBox>
-        {auth === null ?
+        {!isAuth ?
           <User>
             <ImUser style={{
               fontSize: '20px',
@@ -47,7 +62,7 @@ const Navbar = () => {
           <UserBox onClick={handleLogout}>
             <UserImage src={auth[0].imgUrl} />
             <UserName>{username(auth[0].name)}</UserName>
-            { logout && <Logout onClick={handleUserLogout}>Logout</Logout> }
+            {logout && <Logout onClick={handleUserLogout}>Logout</Logout>}
           </UserBox>
         }
         <Language>
@@ -63,7 +78,7 @@ const Navbar = () => {
       <Mobile>
         <MenuBar>
           <Logo src="https://download.logo.wine/logo/Dell_Technologies/Dell_Technologies-Logo.wine.png" alt="logo" />
-          {auth === null ?
+          {!isAuth ?
             <User>
               <ImUser style={{
                 fontSize: '20px',

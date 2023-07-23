@@ -30,7 +30,10 @@ const login = (details) => (dispatch) => {
         .then((res) => {
             console.log('res: ', res);
             alert(res.data.message);
-            dispatch({ type: types.LOGIN_POST_SUCCESS, payload: res.data.data });
+            {
+                res.data.data &&
+                dispatch({ type: types.LOGIN_POST_SUCCESS, payload: res.data.data });
+            }
         })
         .catch((error) => {
             console.log('error: ', error);
