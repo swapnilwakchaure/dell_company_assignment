@@ -12,6 +12,9 @@ https://dell-company-assignment-backend-api-url.vercel.app
 
 
 ## Built with
+
+### Frontend
+
 <ul>
   <li>React js</li>
   <li>Redux</li>
@@ -31,6 +34,26 @@ https://dell-company-assignment-backend-api-url.vercel.app
   <li>Redux-Thunk</li>
   <li>React-router-dom</li>
   <li>React Icons</li>
+</ul>
+
+### Backend
+<ul>
+  <li>Node.Js</li>
+  <li>Express.Js</li>
+  <li>MongoDB</li>
+  <li>Mongoose</li>
+</ul>
+
+### Used Libraries
+<ul>
+  <li>bcrypt</li>
+  <li>cors</li>
+  <li>cloudinary</li>
+  <li>dotenv</li>
+  <li>express</li>
+  <li>jsonwebtoken</li>
+  <li>mongoose</li>
+  <li>nodemon</li>
 </ul>
 
 ## Features
