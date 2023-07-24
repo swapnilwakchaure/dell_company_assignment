@@ -60,7 +60,7 @@ const Register = () => {
         formData.append('image', file);
 
         axios
-            .post('http://localhost:8080/auth/upload', formData)
+            .post('https://dell-company-assignment-backend-api-url.vercel.app/auth/upload', formData)
             .then((res) => {
                 // console.log('res: ', res.data.data);
                 setImgUrl(res.data.data);
@@ -76,7 +76,7 @@ const Register = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        if (imgUrl && name && email && password) {
+        if (name && email && password) {
             if (strength === 'Strong') {
                 const payload = { imgUrl, name, email, password };
                 dispatch(register(payload));
@@ -138,6 +138,7 @@ const Register = () => {
                     <Input
                         autoFocus
                         type="text"
+                        minLength={8}
                         value={name}
                         onChange={(e) => setName(e.target.value)}
                         placeholder="Enter Name"
@@ -151,6 +152,7 @@ const Register = () => {
                     <Input
                         type="email"
                         value={email}
+                        minLength={8}
                         onChange={(e) => setEmail(e.target.value)}
                         placeholder="Enter Email"
                     />

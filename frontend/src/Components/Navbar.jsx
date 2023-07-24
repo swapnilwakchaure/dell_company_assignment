@@ -60,8 +60,8 @@ const Navbar = () => {
             <Link to='/register'>Sign In</Link>
           </User> :
           <UserBox onClick={handleLogout}>
-            <UserImage src={auth[0].imgUrl} />
-            <UserName>{username(auth[0].name)}</UserName>
+            {auth[0].imgUrl ? <UserImage src={auth[0].imgUrl} /> :
+              <UserName>{username(auth[0].name)}</UserName>}
             {logout && <Logout onClick={handleUserLogout}>Logout</Logout>}
           </UserBox>
         }
@@ -86,7 +86,8 @@ const Navbar = () => {
               <Link to='/register'>Sign In</Link>
             </User> :
             <UserBox>
-              <UserImage src={auth[0].imgUrl} />
+              {auth[0].imgUrl ? <UserImage src={auth[0].imgUrl} /> :
+                <UserName>{username(auth[0].name)}</UserName>}
               <UserName>{username(auth[0].name)}</UserName>
             </UserBox>
           }

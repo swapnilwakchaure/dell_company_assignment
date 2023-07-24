@@ -8,7 +8,7 @@ const register = (details) => (dispatch) => {
     dispatch({ type: types.REGISTER_POST_REQUEST });
 
     axios
-        .post('http://localhost:8080/auth/register', details)
+        .post('https://dell-company-assignment-backend-api-url.vercel.app/auth/register', details)
         .then((res) => {
             // console.log('res: ', res);
             alert(res.data.message);
@@ -26,9 +26,9 @@ const login = (details) => (dispatch) => {
     dispatch({ type: types.LOGIN_POST_REQUEST });
 
     axios
-        .post('http://localhost:8080/auth/login', details)
+        .post('https://dell-company-assignment-backend-api-url.vercel.app/auth/login', details)
         .then((res) => {
-            console.log('res: ', res);
+            // console.log('res: ', res);
             alert(res.data.message);
             {
                 res.data.data &&

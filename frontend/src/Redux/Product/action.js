@@ -4,10 +4,11 @@ import axios from "axios";
 
 const getData = (page, q) => (dispatch) => {
 
+    let limit = 9;
     dispatch({ type: types.GET_PRODUCT_REQUEST });
 
     axios
-        .get(`http://localhost:8080/product?_page=${page}&_limit=9&q=${q}`)
+        .get(`https://dell-company-assignment-backend-api-url.vercel.app/product?_page=${page}&_limit=${limit}&q=${q}`)
         .then((res) => {
             // console.log('res: ', res);
             dispatch({ type: types.GET_PRODUCT_SUCCESS, payload: res.data })
